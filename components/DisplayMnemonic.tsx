@@ -21,33 +21,17 @@ export const DisplayMnemonic: React.FC<DisplayMnemonicProps> = ({ mnemonic }) =>
             const mnemonicString = mnemonic.join(" ");
             navigator.clipboard.writeText(mnemonicString)
                 .then(() => {
-                    toast.success("Mnemonic copied to clipboard", {
-                        position: "top-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    toast.success("Mnemonic copied to clipboard");
                 })
                 .catch((err) => {
-                    toast.error(`Failed to copy: ${err.message}`, {
-                        position: "top-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    toast.error(`Failed to copy: ${err.message}`);
                 });
         }
     };
 
     return (
         <motion.div 
-            className="flex flex-col items-center bg-slate-800 p-6 rounded-lg shadow-lg w-full"
+            className="flex flex-col items-center p-6 rounded-lg shadow-lg w-full border-2 border-gray-500"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
@@ -55,7 +39,7 @@ export const DisplayMnemonic: React.FC<DisplayMnemonicProps> = ({ mnemonic }) =>
             {showCopy && (
                 <Button 
                     onClick={copyToClipBoard} 
-                    className="mb-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-transform transform hover:scale-105"
+                    className="mb-4 font-bold py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-transform transform hover:scale-105"
                 >
                     <MdContentCopy className="text-xl" />
                     Copy
@@ -71,7 +55,7 @@ export const DisplayMnemonic: React.FC<DisplayMnemonicProps> = ({ mnemonic }) =>
                     {mnemonic.map((word, index) => (
                         <motion.div 
                             key={index} 
-                            className="text-center p-2 border-2 border-black-600 rounded-md text-xl text-white bg-slate-600"
+                            className="text-center p-2 border-2 rounded-md text-xl"
                             whileHover={{ scale: 1.1 }}
                         >
                             {word}

@@ -85,25 +85,33 @@ export function BlockchainDropdown({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4 rounded-lg shadow-lg bg-gray-800 ">
-      <h2 className="text-2xl font-bold text-white mb-4 ">Add Blockchain Account</h2>
+    <div className="flex flex-col items-center justify-center w-full p-4 rounded-lg shadow-lg bg-card text-card-foreground border-2 border-gray-600 mb-28">
+      <h2 className="text-2xl font-bold mb-4">Add Blockchain Account</h2>
       <div className="flex flex-col md:flex-row gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="text-lg py-2 px-4 bg-white text-blue-600 font-bold rounded-md transition-transform transform hover:scale-105 hover:bg-cyan-600">
+            <Button variant="outline" className="text-lg py-2 px-4 font-bold rounded-md transition-transform transform hover:scale-105">
               {selectedChain}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-48 text-lg flex flex-col font-bold">
-            <DropdownMenuLabel className="text-center text-blue-600">SELECT CHAIN</DropdownMenuLabel>
+          <DropdownMenuContent 
+            className="w-48 text-lg flex flex-col font-bold bg-card text-card-foreground z-50 shadow-lg rounded-lg p-2" 
+            side="bottom" 
+            align="center"
+            sideOffset={12} // Adjusting the distance from the trigger
+            >
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => handleSelect('Ethereum')} className="hover:bg-blue-600 hover:text-white">
-                Ethereum
+              <DropdownMenuItem 
+                onClick={() => handleSelect('Ethereum')} 
+                className="hover:bg-muted hover:text-muted-foreground p-2 rounded-lg text-[17px]">
+                ETHEREUM
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleSelect('Solana')} className="hover:bg-blue-600 hover:text-white">
-                Solana
+              <DropdownMenuItem 
+                onClick={() => handleSelect('Solana')} 
+                className="hover:bg-muted hover:text-muted-foreground p-2 rounded-lg text-[17px]">
+                SOLANA
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
@@ -111,10 +119,10 @@ export function BlockchainDropdown({
         <Button
           variant="outline"
           onClick={handleAddAccount}
-          className="text-lg py-2 px-4 bg-blue-600 text-white font-bold rounded-md transition-transform transform hover:scale-105 hover:bg-blue-700"
+          className="text-lg py-2 px-4 font-bold rounded-md transition-transform transform hover:scale-105"
           disabled={selectedChain === 'Select Blockchain'}
         >
-          {`Create ${selectedChain} Wallet`}
+          {selectedChain === "Select Blockchain" ? "Select Blockchain To create a Wallet" : (`Create ${selectedChain} Wallet`)}
         </Button>
       </div>
     </div>

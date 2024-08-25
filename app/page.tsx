@@ -3,6 +3,7 @@
 import { DisplayAccounts } from '@/components/DisplayAccounts';
 import { BlockchainDropdown } from '@/components/DropdownChain';
 import { GenerateSeedPhrase } from '@/components/GenerateSeedPhrase';
+import { Title } from '@/components/Title';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
@@ -22,6 +23,7 @@ export default function Home() {
     <>
       <ToastContainer />
       <div className="flex flex-col gap-4 mt-4">
+        <Title />
         <GenerateSeedPhrase 
         mnemonic={mnemonic} 
         setMnemonic={setMnemonic} 

@@ -17,15 +17,19 @@ const bungee = Bungee({
 });
 
 export const Header = () => {
-    const [mounted , setMounted] = useState(false);
-        useEffect(() => {
+    // Manage mounted state to prevent SSR issues
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
         setMounted(true);
-    } , [])
+    }, []);
+
     if (!mounted) {
-        return null;
+        return null;  // Avoid rendering the component until it’s mounted
     }
+
     return (
-        <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-4 md:p-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+        <header className="text-white p-4 md:p-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 border-2 border-gray-600 rounded-md">
             <div className="flex items-center space-x-4 md:space-x-6">
                 <img src="/wallet.jpeg" alt="Wallet Image" className="w-16 h-16 rounded-xl shadow-xl border-4 border-teal-500"/>
                 <div className="flex flex-col">
@@ -33,13 +37,10 @@ export const Header = () => {
                         BLOCKCHAIN
                     </p>
                     <p className={`${bungee.className} text-lg md:text-xl lg:text-2xl font-bold text-blue-400`}>
-                        WEB BASED WALLETS
+                        WEB BASED WALLET
                     </p>
                 </div>
             </div>
-            <Button className={`${roboto.className} py-2 px-4 md:py-3 md:px-6 rounded-lg text-4xl md:text-lg font-semibold bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-lg transition-all duration-300`}>
-                WALLET GENERATOR 
-            </Button>
             <div className="flex-shrink-0">
                 <ThemeToggle />
             </div>

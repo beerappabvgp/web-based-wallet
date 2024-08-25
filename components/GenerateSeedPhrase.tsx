@@ -33,7 +33,7 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({
       setSolanaAccounts([]);
       const mnemonic = generateMnemonic(128);
       setMnemonic(mnemonic.split(' '));
-      setShowSeedPhrase(false); // Close the seed phrase when generating a new one
+      setShowSeedPhrase(false);
       toast.dismiss();
     } catch (error) {
       toast.error('Failed to generate mnemonic');
@@ -49,11 +49,11 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full lg:w-full p-4 rounded-lg shadow-lg bg-gray-800">
-      <h2 className="text-2xl font-bold text-white mb-4">Generate Seed Phrase</h2>
+    <div className="flex flex-col items-center justify-center w-full lg:w-full p-4 rounded-lg shadow-lg border-2 border-gray-600">
+      
       <Button
         onClick={handleGenerateSeedPhrase}
-        className="mb-4 bg-white text-blue-600 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg"
+        className="mb-4 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg border-2"
       >
         Generate Seed Phrase
       </Button>
@@ -61,16 +61,16 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({
         {mnemonic.length > 0 && showSeedPhrase ? (
           <>
             <DisplayMnemonic mnemonic={mnemonic} />
-            <Button onClick={handleCloseSeedPhrase} className="mt-4 bg-white text-red-600 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
+            <Button onClick={handleCloseSeedPhrase} className="mt-4 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
               Close Seed Phrase
             </Button>
           </>
         ) : mnemonic.length > 0 ? (
-          <Button onClick={handleRevealSeedPhrase} className="bg-white text-blue-600 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
+          <Button onClick={handleRevealSeedPhrase} className="font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
             Reveal Seed Phrase
           </Button>
         ) : (
-          <p className="text-xl text-white">Please generate a seed phrase to display</p>
+          <p className="text-xl">Please generate a seed phrase to display</p>
         )}
       </div>
     </div>
