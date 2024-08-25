@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       <ToastContainer />
-      <div className="min-h-screen flex flex-col items-start justify-center gap-4 p-4">
+      <div className="flex flex-col gap-4 mt-4">
         <GenerateSeedPhrase 
         mnemonic={mnemonic} 
         setMnemonic={setMnemonic} 

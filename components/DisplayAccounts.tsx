@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { FaCopy } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Account {
   publicKey: string;
@@ -24,19 +26,42 @@ export function DisplayAccounts({ ethereumAccounts, solanaAccounts, selectedChai
     });
   };
 
+  const handleCopyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('Copied to clipboard!');
+      })
+      .catch(() => {
+        toast.error('Failed to copy to clipboard.');
+      });
+  };
+
   const accountsToShow = selectedChain === 'Ethereum' ? ethereumAccounts : solanaAccounts;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 text-xl">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 text-xl">
       {accountsToShow.map((account, index) => (
         <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-lg">
-          <p className="text-white break-all mb-3">Public Key: {account.publicKey}</p>
-          <p className="text-white break-all mb-3">
-            Private Key: {showPrivateKey[index] ? account.privateKey : '**********'}
-          </p>
-          <Button variant="outline" onClick={() => handleTogglePrivateKey(index)} className="mt-2 bg-blue-600 hover:bg-blue-700">
-            {showPrivateKey[index] ? 'Hide' : 'Show'} Private Key
-          </Button>
+          <h3 className="text-lg font-bold text-white mb-3">Wallet {index + 1}</h3>
+          <div className="mb-3 flex items-center">
+            <p className="text-white break-all mb-1 flex-grow">Public Key: {account.publicKey}</p>
+            <button onClick={() => handleCopyToClipboard(account.publicKey)} className="ml-2 text-blue-500 hover:text-blue-400">
+              <FaCopy size={18} />
+            </button>
+          </div>
+          <div className="mb-3 flex items-center">
+            <p className="text-white break-all mb-1 flex-grow">
+              Private Key: {showPrivateKey[index] ? account.privateKey : '**********'}
+            </p>
+            <button onClick={() => handleTogglePrivateKey(index)} className="ml-2 text-blue-500 hover:text-blue-400">
+              {showPrivateKey[index] ? 'Hide' : 'Show'}
+            </button>
+            {showPrivateKey[index] && (
+              <button onClick={() => handleCopyToClipboard(account.privateKey)} className="ml-2 text-blue-500 hover:text-blue-400">
+                <FaCopy size={18} />
+              </button>
+            )}
+          </div>
           <p className="text-gray-400 mt-2">Path: {account.path}</p>
         </div>
       ))}

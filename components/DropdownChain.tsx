@@ -85,12 +85,12 @@ export function BlockchainDropdown({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4 rounded-lg shadow-lg bg-gray-800">
-      <h2 className="text-2xl font-bold text-white mb-4">Add Blockchain Account</h2>
-      <div className="flex gap-4">
+    <div className="flex flex-col items-center justify-center w-full p-4 rounded-lg shadow-lg bg-gray-800 ">
+      <h2 className="text-2xl font-bold text-white mb-4 ">Add Blockchain Account</h2>
+      <div className="flex flex-col md:flex-row gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="text-lg py-2 px-4 bg-white text-blue-600 font-bold rounded-md transition-transform transform hover:scale-105">
+            <Button variant="outline" className="text-lg py-2 px-4 bg-white text-blue-600 font-bold rounded-md transition-transform transform hover:scale-105 hover:bg-cyan-600">
               {selectedChain}
             </Button>
           </DropdownMenuTrigger>
@@ -111,7 +111,7 @@ export function BlockchainDropdown({
         <Button
           variant="outline"
           onClick={handleAddAccount}
-          className="text-lg py-2 px-4 bg-blue-600 text-white font-bold rounded-md transition-transform transform hover:scale-105"
+          className="text-lg py-2 px-4 bg-blue-600 text-white font-bold rounded-md transition-transform transform hover:scale-105 hover:bg-blue-700"
           disabled={selectedChain === 'Select Blockchain'}
         >
           {`Create ${selectedChain} Wallet`}

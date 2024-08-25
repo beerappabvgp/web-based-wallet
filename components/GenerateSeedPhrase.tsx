@@ -19,7 +19,12 @@ interface GenerateSeedPhraseProps {
   setSolanaAccounts: React.Dispatch<React.SetStateAction<Account[]>>;
 }
 
-export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({ mnemonic, setMnemonic , setEthereumAccounts , setSolanaAccounts }) => {
+export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({
+  mnemonic,
+  setMnemonic,
+  setEthereumAccounts,
+  setSolanaAccounts,
+}) => {
   const [showSeedPhrase, setShowSeedPhrase] = useState<boolean>(false);
 
   const handleGenerateSeedPhrase = () => {
@@ -28,6 +33,7 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({ mnemonic
       setSolanaAccounts([]);
       const mnemonic = generateMnemonic(128);
       setMnemonic(mnemonic.split(' '));
+      setShowSeedPhrase(false); // Close the seed phrase when generating a new one
       toast.dismiss();
     } catch (error) {
       toast.error('Failed to generate mnemonic');
@@ -36,6 +42,10 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({ mnemonic
 
   const handleRevealSeedPhrase = () => {
     setShowSeedPhrase(true);
+  };
+
+  const handleCloseSeedPhrase = () => {
+    setShowSeedPhrase(false);
   };
 
   return (
@@ -49,7 +59,12 @@ export const GenerateSeedPhrase: React.FC<GenerateSeedPhraseProps> = ({ mnemonic
       </Button>
       <div className="flex flex-col items-center">
         {mnemonic.length > 0 && showSeedPhrase ? (
-          <DisplayMnemonic mnemonic={mnemonic} />
+          <>
+            <DisplayMnemonic mnemonic={mnemonic} />
+            <Button onClick={handleCloseSeedPhrase} className="mt-4 bg-white text-red-600 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
+              Close Seed Phrase
+            </Button>
+          </>
         ) : mnemonic.length > 0 ? (
           <Button onClick={handleRevealSeedPhrase} className="bg-white text-blue-600 font-bold py-2 px-4 rounded-md transition-transform transform hover:scale-105 text-lg">
             Reveal Seed Phrase

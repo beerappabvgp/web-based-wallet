@@ -47,7 +47,7 @@ export const DisplayMnemonic: React.FC<DisplayMnemonicProps> = ({ mnemonic }) =>
 
     return (
         <motion.div 
-            className="flex flex-col items-center bg-slate-800 p-6 rounded-lg shadow-lg"
+            className="flex flex-col items-center bg-slate-800 p-6 rounded-lg shadow-lg w-full"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
@@ -63,7 +63,7 @@ export const DisplayMnemonic: React.FC<DisplayMnemonicProps> = ({ mnemonic }) =>
             )}
             {showCopy && (
                 <motion.div 
-                    className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 shadow-lg p-4 rounded-lg"
+                    className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 shadow-lg p-4 rounded-lg w-full"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
